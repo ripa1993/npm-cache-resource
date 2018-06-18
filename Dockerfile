@@ -39,6 +39,13 @@ RUN apk add --update \
     nasm \
   && rm -rf /var/cache/apk/*
 
+# Issue: https://github.com/ymedlop/npm-cache-resource/issues/42
+# Adding libvips support
+RUN apk add --update \
+    --repository http://dl-3.alpinelinux.org/alpine/edge/testing \
+    vips-tools vips-dev fftw-dev \
+    && rm -rf /var/cache/apk/*
+
 # according to Brian Clements, can't `git pull` unless we set these
 RUN git config --global user.email "git@localhost" && \
     git config --global user.name "git"
